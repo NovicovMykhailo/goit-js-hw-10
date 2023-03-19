@@ -79,13 +79,11 @@ body {
   order: 2;
 
 }
-
 .card:hover {
   box-shadow: inset 0px 0px 10px rgba(186, 126, 126, 0.9),
     5px 5px 15px rgb(186, 126, 126, 0.9);
   cursor: pointer;
 }
-
 .card > div > img {
   object-fit: contain;
   width: 100%;
@@ -97,7 +95,6 @@ body {
   box-shadow: 0.5px 0.5px 0.8px #a6afc3b3, 1.6px 1.7px 2.6px -0.8px #a6afc3b3,
     3.9px 4.3px 6.5px -1.7px #a6afc3b3, 9.5px 10.4px 15.8px -2.5px #a6afc3b3;
 }
-
 .card:hover img {
   scale: 1.04;
 }
@@ -110,7 +107,6 @@ body {
   margin: 0;
   margin-bottom: 10px;
 }
-
 .card > ul,
 .card > li {
   list-style: none;
