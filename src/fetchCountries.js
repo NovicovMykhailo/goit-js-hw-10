@@ -18,3 +18,4 @@ function fetchCountries(name) {
       return obj
     });
 }
+
