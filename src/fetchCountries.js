@@ -8,11 +8,12 @@ function fetchCountries(name) {
     .then(data => {
       let obj = data.map(e => {
         const nameOfficial = e.name.official;
-        const capital = e.capital;
+        const capital = e.capital.toString().split(',').join(', ');
         const population = e.population;
-        const flag = e.coatOfArms.svg;
+        const flag = e.flags.svg;
         const language = Object.values(e.languages).toString().split(',').join(', ');
-        return { nameOfficial, capital, population, flag, language };
+        const link = e.maps.googleMaps
+        return { nameOfficial, capital, population, flag, language, link};
       });
       return obj
     });

@@ -21,21 +21,27 @@ function onInput(event) {
     e.map(el => {
     // console.log('onInput -> el', el)
         
-      let { nameOfficial, capital, population, flag, language } = el;
+      let { nameOfficial, capital, population, flag, language, link } = el;
       if(flag === undefined){
         flag = `https://gdr.one/simg/200x250/ebf2fa/4E4E4E?text=Not%20found`
       }
+      console.log(link)
       refs.countryInfoCard.insertAdjacentHTML(
         'beforeend',
-        `<ul class ="card">
-            <div><img src = "${flag}" alt="Flag" width="200" height="250"/></div>
+        `<a class ="card" href=${link} target="”"_blank">
+                <div>
+                    <img src = "${flag}" alt="Flag" width="600" height="300"/>
+                </div>
                 <ul>
-                    <li><p>Повна назва країни:</p>${nameOfficial}</li>
-                    <li><p>Cтолиця:</p> ${capital}</li>
                     <li><p>Населення:</p> ${population} людей</li>
                     <li><p>Мови:</p> ${language}</li>
                 </ul>
-        </ul>`
+                <ol class="bottom-fr">
+                  <li><splan class ="country">${nameOfficial}</span></li>
+                  <li><p>Cтолиця:</p> ${capital}</li>
+                </ol>
+
+        </a>`
       );
     }),
   );
