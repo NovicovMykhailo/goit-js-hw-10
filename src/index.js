@@ -19,6 +19,7 @@ function onInput(event) {
   if (inputValue === '') {
     refs.countryInfoCard.innerHTML = '';
     refs.countryList.innerHTML =''
+    refs.countryList.classList.toggle('isVisible')
 
     return;
   }
@@ -27,7 +28,10 @@ function onInput(event) {
     if (e.length > 2 && e.length < 10) {
       refs.countryList.classList.toggle('isVisible')
       e.map(el => {
+        refs.countryInfoCard.innerHTML = '';
+
         let { flag, nameOfficial } = el;
+
         refs.countryList.insertAdjacentHTML(
           'beforeend',
           `<li><img src = "${flag}" alt="Flag" width="45"/>${nameOfficial}</li>`

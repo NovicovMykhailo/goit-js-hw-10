@@ -1,4 +1,5 @@
 export { fetchCountries };
+import Notiflix from 'notiflix';
 
 function fetchCountries(name) {
   return fetch(`https://restcountries.com/v3.1/name/${name}`)
@@ -16,6 +17,8 @@ function fetchCountries(name) {
         return { nameOfficial, capital, population, flag, language, link};
       });
       return obj
-    });
+    }).catch(error =>
+      Notiflix.Notify.failure(`${error.name}`)
+      );
 }
 
