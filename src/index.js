@@ -11,15 +11,15 @@ const refs = {
   countryInfoCard: document.querySelector('.country-info'),
 };
 
-// refs.inputField.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
-refs.inputField.addEventListener('input', onInput);
+refs.inputField.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
+
 
 function onInput(event) {
   let inputValue = refs.inputField.value.toLowerCase().trim();
   if (inputValue === '') {
     refs.countryInfoCard.innerHTML = '';
     refs.countryList.innerHTML =''
-    refs.countryInfoCard.innerHTML =''
+
     return;
   }
 
@@ -35,14 +35,14 @@ function onInput(event) {
       })
       document.querySelector('.country-list.isVisible').addEventListener('click', onLinkClick)
      
-    }
-    else if (e.length > 10 || inputValue.length === 1) {
+    }  else if (e.length > 10) {
       Notiflix.Notify.info(
         'Too many matches found. Please enter a more specific name.',
-        { timeout: 1500, width: '390px', titleFontSize: '18px' }
+        { timeout: 1000, width: '390px', titleFontSize: '18px' }
       );
       return;
     }  else if (e.length < 2) {
+      refs.countryList.innerHTML =''
       e.map(el => {
         let { nameOfficial, capital, population, flag, language, link } = el;
         refs.countryInfoCard.insertAdjacentHTML(
@@ -64,16 +64,22 @@ function onInput(event) {
         );
       });
     }
-  });
+  }).catch(error => 
+
+    Notiflix.Notify.failure(`Sorry, something went wrong`)),
+        refs.countryInfoCard.innerHTML = ''
 }
 
 
 function onLinkClick(e){
-  // console.log(e.target.textContent)
-  refs.countryList.innerHTML =''
-  refs.countryList.classList.toggle('isVisible')
+  refs.inputField.value =' '
   const selectedCountry = e.target.textContent
+
   fetchCountries(selectedCountry).then(el =>{
+
+    refs.countryList.innerHTML =''
+    refs.countryList.classList.toggle('isVisible')
+
   
       refs.countryInfoCard.insertAdjacentHTML(
         'beforeend',
@@ -83,7 +89,7 @@ function onLinkClick(e){
                 </div>
                 <ul>
                     <li><p>Населення:</p> ${el[0].population} людей</li>
-                    <li><p>Мови:</p> ${el.language}</li>
+                    <li><p>Мови:</p> ${el[0].language}</li>
                 </ul>
                 <ol class="bottom-fr">
                   <li><splan class ="country">${el[0].nameOfficial}</span></li>
@@ -92,6 +98,7 @@ function onLinkClick(e){
 
         </a>`
       );
+
 
 
   })

@@ -80,8 +80,6 @@ body {
   order: 2;
 }
 .card:hover {
-  /* box-shadow: inset 0px 0px 10px rgba(186, 126, 126, 0.9),
-    5px 5px 15px rgb(186, 126, 126, 0.9); */
   box-shadow: 5px 5px 15px rgb(186, 126, 126, 0.9);
   cursor: pointer;
 }
@@ -229,6 +227,13 @@ body {
   align-items: center;
   font-size: 20px;
   cursor: pointer;
+  transition: all 200ms linear;
+}
+.country-list > li:hover{
+  border-radius: 10px;
+  padding: 10px;
+  scale: 1.05;
+  box-shadow: 5px 5px 15px rgb(186, 126, 126, 0.5);
 }
 .country-list > li > img {
   object-fit: cover;
