@@ -23,6 +23,9 @@ function fetchCountries(name) {
       });
       showSpinner("none")
       return obj;
+    }).catch(e => {
+      showSpinner("none"),
+      Notiflix.Notify.failure('No Sutch Country found')
     })
     
 }
@@ -32,5 +35,5 @@ function showSpinner(val) {
     document.querySelector('.lds-dual-ring').style.cssText='opacity: 0';
     return
   }
-  document.querySelector('.lds-dual-ring').style.cssText='opacity: 1';
+  document.querySelector('.lds-dual-ring').style.cssText=' opacity: 1';
 }

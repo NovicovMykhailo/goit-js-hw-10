@@ -141,6 +141,12 @@ body {
   width: 100%;
   margin-bottom: 10px;
 }
+#NotiflixNotifyWrap {
+  position: absolute !important;
+  top: 100px !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+}
 
 @media (min-width: 600px) {
   #search-box {
@@ -179,6 +185,12 @@ body {
   .country {
     font-size: 26px;
   }
+  #NotiflixNotifyWrap{
+    position: absolute !important;
+    top: 30px !important;
+    left: 420px !important;
+    transform: translateX(0);
+  }
 }
 @media (min-width: 1200px) {
   .country-info {
@@ -187,13 +199,10 @@ body {
   .card > div > img {
     width: 240px;
   }
+
 }
 
-#NotiflixNotifyWrap {
-  position: absolute !important;
-  top: 100px !important;
-  left: 20px !important;
-}
+
 
 .country-list {
   display: block;
@@ -239,16 +248,15 @@ body {
   object-fit: cover;
   height: 30px;
 }
-
-
 .lds-dual-ring {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 24px;
+  height: 24px;
   opacity: 0;
   position: absolute;
   top: 44px;
   left: 33px;
+  transition: opacity 500ms linear;
 }
 .lds-dual-ring:after {
   content: " ";

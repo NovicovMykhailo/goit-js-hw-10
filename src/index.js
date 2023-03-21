@@ -12,57 +12,54 @@ const refs = {
 };
 
 refs.inputField.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
+refs.inputField.addEventListener('keyup', onRemoveInputValue);
+refs.inputField.addEventListener('click', resetAll);
 
 function onInput(event) {
   let inputValue = refs.inputField.value.toLowerCase().trim();
   if (inputValue === '') {
-    refs.countryInfoCard.innerHTML = '';
-    refs.countryList.innerHTML = '';
-    refs.countryList.classList.remove('isVisible');
-
+    resetAll();
     return;
   }
-
   fetchCountries(inputValue)
     .then(e => {
-      if (e.length > 10) {
+     
+      if (e.length > 10 && e.length !== undefined) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.',
           { timeout: 1000, width: '390px', titleFontSize: '18px' }
         );
         return;
       } else if (e.length > 2 && e.length < 10) {
-        showSpinner('none')
+        showSpinner('none');
         listIsVisible();
         e.map(el => {
           listMarkup(el);
-          refs.countryInfoCard.innerHTML = '';
+          removeCard();
+          removeNotiflix();
         });
         document
           .querySelector('.country-list.isVisible')
           .addEventListener('click', onLinkClick);
       } else if (e.length < 2) {
         e.map(cardMarkup);
-        refs.countryList.innerHTML = '';
+        removeNotiflix();
+        showSpinner('none');
+        removeCountryList();
       }
     })
-    .catch(
-      error => Notiflix.Notify.failure(`No such country found`),
-      (refs.countryInfoCard.innerHTML = '')
-    );
+    .catch(removeCard());
 }
 function onLinkClick(e) {
   refs.inputField.value = '';
   const selectedCountry = e.target.textContent;
 
   fetchCountries(selectedCountry).then(el => {
-    refs.countryList.innerHTML = '';
-    refs.countryList.classList.toggle('isVisible');
-
+    removeCountryList();
+    refs.countryList.classList.add('isVisible');
     cardMarkup(el[0]);
   });
 }
-
 function cardMarkup(obj) {
   refs.countryList.classList.remove('isVisible');
   refs.countryInfoCard.insertAdjacentHTML(
@@ -92,7 +89,27 @@ function listMarkup(obj) {
 function listIsVisible() {
   return refs.countryList.classList.add('isVisible');
 }
-
-function clearingInput(){
-
+function removeNotiflix() {
+  if(document.querySelector('#NotiflixNotifyWrap')){
+    document.querySelector('#NotiflixNotifyWrap').style.display = 'none';
+  }
+  
+}
+function removeCountryList(){
+  refs.countryList.innerHTML = ''
+}
+function removeCard(){
+  refs.countryInfoCard.innerHTML = ''
+}
+function resetAll() {
+  refs.inputField.value = '';
+  refs.countryInfoCard.innerHTML = '';
+  refs.countryList.innerHTML = '';
+  refs.countryList.classList.remove('isVisible');
+}
+function onRemoveInputValue(e) {
+  showSpinner('none')
+  if (e.key == 'Backspace' || e.key == 'Delete') {
+    refs.inputField.value = '';
+  }
 }
