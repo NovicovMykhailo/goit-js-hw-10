@@ -25,7 +25,7 @@ function fetchCountries(name) {
       return obj;
     }).catch(e => {
       showSpinner("none"),
-      Notiflix.Notify.failure('No Sutch Country found')
+      Notiflix.Notify.failure(`Nothing found for your request`)
     })
     
 }

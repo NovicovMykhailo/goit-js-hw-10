@@ -16,6 +16,7 @@ refs.inputField.addEventListener('keyup', onRemoveInputValue);
 refs.inputField.addEventListener('click', resetAll);
 
 function onInput(event) {
+
   let inputValue = refs.inputField.value.toLowerCase().trim();
   if (inputValue === '') {
     resetAll();
