@@ -16,16 +16,17 @@ refs.inputField.addEventListener('keyup', onRemoveInputValue);
 refs.inputField.addEventListener('click', resetAll);
 
 function onInput(event) {
-
   let inputValue = refs.inputField.value.toLowerCase().trim();
+
   if (inputValue === '') {
     resetAll();
     return;
   }
   fetchCountries(inputValue)
     .then(e => {
-     
-      if (e.length > 10 && e.length !== undefined) {
+      if (!e) {
+        return;
+      } else if (e.length > 10 && e.length !== undefined) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.',
           { timeout: 1000, width: '390px', titleFontSize: '18px' }
@@ -91,16 +92,15 @@ function listIsVisible() {
   return refs.countryList.classList.add('isVisible');
 }
 function removeNotiflix() {
-  if(document.querySelector('#NotiflixNotifyWrap')){
+  if (document.querySelector('#NotiflixNotifyWrap')) {
     document.querySelector('#NotiflixNotifyWrap').style.display = 'none';
   }
-  
 }
-function removeCountryList(){
-  refs.countryList.innerHTML = ''
+function removeCountryList() {
+  refs.countryList.innerHTML = '';
 }
-function removeCard(){
-  refs.countryInfoCard.innerHTML = ''
+function removeCard() {
+  refs.countryInfoCard.innerHTML = '';
 }
 function resetAll() {
   refs.inputField.value = '';
@@ -109,7 +109,7 @@ function resetAll() {
   refs.countryList.classList.remove('isVisible');
 }
 function onRemoveInputValue(e) {
-  showSpinner('none')
+  showSpinner('none');
   if (e.key == 'Backspace' || e.key == 'Delete') {
     refs.inputField.value = '';
   }
